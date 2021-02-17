@@ -30,6 +30,11 @@ public class Account1_1 {
 		avg = tot/3;
 		return 0;
 	}
+	//나는 메소드를 선언할 수 있다.
+	//대입연산자 int i = 2;
+	//메소드 안에 있는 ,는 열거형 연산자라고 한다.
+	//. dot 연산자 - 주소번지.전역변수
+	//점근제한자(access modifier) - static 수정자 - 리턴타입 - 메소드이름(파라미터1,파라미터2,...)
 	public static void main(String[] args) {
 		Account1_1 ac = new Account1_1();
 		ac.kor = 70;
