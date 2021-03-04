@@ -27,12 +27,15 @@ package com.vo;
 public class DeptVO {
 	private int 	deptno = 0;//원시형 타입 - 부르면 값이 나온다.  4byte이니까 229540 229544 229548 ....
 	private String 	dname  = null;//레퍼런스 타입 - 클래스 급이다.- 값이 아니라 주소번지가 나온다. 영업부 출력되지 않나요? 네 예외죠. 돌연변이 그러니까 중요함.
-	private String  loc	   =  null;
-	//getter메소드 - Read
-	public int getDeptno() {
+	private String  loc	   = null;
+	//insert here
+	private EmpVO   eVO    = null;
+	//getter메소드 - Read- 리턴타입이 있다.
+	public int getDeptno() {//파라미터는 필요없다.
 		return deptno;//0
 	}
 	//setter메소드 - Write, Save 느낌으로 접근해보기
+	//리턴타입은 필요없다. 그러나 파라미터는 반드시 필요함.
 	public void setDeptno(int deptno) {
 		//deptno = 30;//상수, 재사용성이 떨어짐.
 		//this는 나 자신을 가리키는 수정자 이다.여기서는 지변과 식별을 위해 사용하였다. 생략할 수 있다. 그런데 헷갈린다.
