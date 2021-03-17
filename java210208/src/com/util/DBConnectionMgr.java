@@ -1,5 +1,6 @@
 package com.util;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,7 +9,8 @@ import java.sql.ResultSet;
 public class DBConnectionMgr {
 	private final static String _DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private final static String _URL 	= "jdbc:oracle:thin:@192.168.0.244:1521:orcl11";
-	private final static String _USER 	= "scott";
+	//private final static String _USER 	= "scott";
+	private final static String _USER 	= "tomato80";
 	private final static String _PW 	= "tiger";
 	private static DBConnectionMgr dbMgr = null;
 	//이른 인스턴스화 eager
@@ -58,6 +60,14 @@ public class DBConnectionMgr {
 	public void freeConnection(Connection con, PreparedStatement pstmt) {
 		try {
 			if(pstmt !=null) pstmt.close();
+			if(con !=null) con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	public void freeConnection(Connection con, CallableStatement cstmt) {
+		try {
+			if(cstmt !=null) cstmt.close();
 			if(con !=null) con.close();
 		} catch (Exception e) {
 			// TODO: handle exception
