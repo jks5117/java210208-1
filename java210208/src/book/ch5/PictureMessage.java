@@ -12,11 +12,11 @@ public class PictureMessage extends JDialog {
 	String imgPath = "D:\\git_java210208\\java210208\\java210208\\src\\images\\";
 	JPanel jp_emoticon 		= new JPanel();
 	GridLayout gl_emoticon 	= new GridLayout(1,5,2,2);
-	JButton pic0 = new JButton("1");
-	JButton pic1 = new JButton("2");
-	JButton pic2 = new JButton("3");
-	JButton pic3 = new JButton("4");
-	JButton pic4 = new JButton("5");
+	JButton pic0 = new JButton();
+	JButton pic1 = new JButton();
+	JButton pic2 = new JButton();
+	JButton pic3 = new JButton();
+	JButton pic4 = new JButton();
 	String imgFile[] = {"lion11.png","lion22.png","lion33.png","lion44.png","lion55.png"};
 	JButton imgButton[] = {pic0,pic1,pic2,pic3,pic4};
 	ImageIcon img[] = new ImageIcon[imgButton.length];
@@ -33,14 +33,8 @@ public class PictureMessage extends JDialog {
 			imgButton[i].setIcon(img[i]);
 			jp_emoticon.add(imgButton[i]);
 		}
-		/*
-		jp_emoticon.add(pic0);
-		jp_emoticon.add(pic1);
-		jp_emoticon.add(pic2);
-		jp_emoticon.add(pic3);
-		jp_emoticon.add(pic4);
-		*/
 		this.add("Center",jp_emoticon);
+		this.setResizable(false);
 		this.setSize(500, 200);
 		this.setVisible(true);
 	}
