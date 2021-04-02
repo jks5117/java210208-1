@@ -133,11 +133,26 @@ public class TomatoClientVer2 extends JFrame implements ActionListener {
 		if(jbtn_one == obj) {
 			
 		}
+		else if(jbtn_change==obj) {
+			String afterName = JOptionPane.showInputDialog("변경할 대화명을 입력하세요.");
+			if(afterName==null || afterName.length()<3) {
+				JOptionPane.showMessageDialog(this,"변경할 대화명을 입력하세요.","INFO",JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+			try {
+				oos.writeObject(Protocol.CHANGE
+						   +Protocol.seperator+nickName
+						   +Protocol.seperator+afterName
+						   +Protocol.seperator+nickName+"님의 대화명이 "+afterName+"으로 변경.");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 		else if(jtf_msg==obj) {
 			try {
 				oos.writeObject(201
-						   +"#"+nickName
-						   +"#"+msg);
+						+"#"+nickName
+						+"#"+msg);
 				jtf_msg.setText("");
 			} catch (Exception e) {
 				// TODO: handle exception

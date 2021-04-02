@@ -44,10 +44,7 @@ public class TomatoClientThread extends Thread{
 						v.add(nickName);
 						tc.dtm.addRow(v);
 					}break;
-					case 200:{
-						
-					}break;
-					case 201:{
+					case Protocol.MESSAGE:{
 						String nickName = st.nextToken();
 						String message = st.nextToken();
 						MutableAttributeSet attr = new SimpleAttributeSet();
@@ -59,10 +56,32 @@ public class TomatoClientThread extends Thread{
 						//새로 메시지가 들어올 때 자동으로 포커스 이동처리
 						tc.jtp_display.setCaretPosition(tc.sd_display.getLength());					
 					}break;
-					case 202:{
-
+					//300#하하#하늘소#하하가 하늘소로 대화명 변경
+					case Protocol.CHANGE:{
+						String nickName = st.nextToken();
+						String afterName = st.nextToken();
+						String msg1 = st.nextToken();
+						for(int i=0;i<tc.dtm.getRowCount();i++) {
+							//기존 대화명 가져오기
+							String currentName = (String)tc.dtm.getValueAt(i, 0);
+							if(currentName.equals(nickName)) {
+								//테이블의 DefaultTableModel갱신처리
+								tc.dtm.setValueAt(afterName, i, 0);
+								break;
+							}
+							try {
+								tc.sd_display.insertString(tc.sd_display.getLength(), msg1+"\n", null);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							tc.jtp_display.setCaretPosition(tc.sd_display.getLength());
+							if(nickName.equals(tc.nickName)) {
+								tc.setTitle(afterName+"님의 대화창");
+								tc.nickName = afterName;//동기화 할것.... 중요
+							}
+						}
 					}break;
-					case 500:{
+					case Protocol.ROOM_OUT:{
 						String nickName = st.nextToken();
 						MutableAttributeSet attr = new SimpleAttributeSet();
 						try {

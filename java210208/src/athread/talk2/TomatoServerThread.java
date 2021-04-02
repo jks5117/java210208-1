@@ -71,20 +71,25 @@ public class TomatoServerThread extends Thread{
 					protocol = Integer.parseInt(st.nextToken());//100
 				}
 				switch(protocol) {
-					case 200:{
-						
-					}break;
-					case 201:{
+					case Protocol.MESSAGE:{
 						String nickName = st.nextToken();
 						String message = st.nextToken();
 						broadCasting(201
 								   +"#"+nickName
 								   +"#"+message);
 					}break;
-					case 202:{
-	
+					case Protocol.CHANGE:{//300#하하#하늘소
+						String nickName = st.nextToken();
+						String afterName = st.nextToken();
+						String msg1 = st.nextToken();
+						this.chatName = afterName;//서버측 이름과 동기화 주의할것.
+						broadCasting(Protocol.CHANGE
+								    +Protocol.seperator+nickName
+								    +Protocol.seperator+afterName
+								    +Protocol.seperator+msg1
+								    );
 					}break;
-					case 500:{
+					case Protocol.ROOM_OUT:{
 						String nickName = st.nextToken();
 						ts.globalList.remove(this);
 						broadCasting(500
