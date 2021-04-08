@@ -18,7 +18,8 @@ public class AddressBook extends JFrame {
     private JMenuItem menuItemInsert;
     private JMenuItem menuItemUpdate;
     private JMenuItem menuItemDelete;
-    private JMenuItem menuItemDetail;
+    private JMenuItem menuItemDetail;//상세조회 - 한건 where ano=5;
+    private JMenuItem menuItemAll;//전체조회 - 여러 건 ;
     private JMenuItem menuItemAbout;
     private JSeparator menuSeparator1;
     private JSeparator menuSeparator2;
@@ -69,6 +70,7 @@ public class AddressBook extends JFrame {
         menuItemUpdate = new JMenuItem();
         menuItemDelete = new JMenuItem();
         menuItemDetail= new JMenuItem();
+        menuItemAll= new JMenuItem("전체조회");
 		menuItemAbout = new JMenuItem();
         menuSeparator1 = new JSeparator();
         menuSeparator2 = new JSeparator();
@@ -112,14 +114,24 @@ public class AddressBook extends JFrame {
 			}
 		});
 
-		// 조회 메뉴아이템
-        menuItemDetail.setFont(font);
-        menuItemDetail.setText("조회");
-        menuItemDetail.addActionListener(new ActionListener() {
+		//전체 조회 메뉴아이템
+        menuItemAll.setFont(font);
+        menuItemAll.setText("전체조회");
+        menuItemAll.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                System.out.println("조회 메뉴");
-                detailActionPerformed();
+                System.out.println("전체 조회 메뉴");
+                allActionPerformed();
             }
+        });
+        
+        //상세 조회 메뉴아이템
+        menuItemDetail.setFont(font);
+        menuItemDetail.setText("상세조회");
+        menuItemDetail.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent evt) {
+        		System.out.println("조회 메뉴");
+        		detailActionPerformed();
+        	}
         });
 
 		// 입력 메뉴아이템
@@ -166,6 +178,7 @@ public class AddressBook extends JFrame {
         // 메뉴 아이템을 메뉴에 붙입니다.
 		menuMenu.add(menuItemConnect);
         menuMenu.add(menuSeparator1);
+		menuMenu.add(menuItemAll);
 		menuMenu.add(menuItemDetail);
 		menuMenu.add(menuItemInsert);
 		menuMenu.add(menuItemUpdate);
@@ -295,6 +308,14 @@ public class AddressBook extends JFrame {
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
     }
+    /****************************************************************
+     * 전체 조회 처리
+     ***************************************************************/
+	protected void allActionPerformed() {
+		System.out.println("전체 조회 버튼 클릭");
+		AddressCtrl actrl = new AddressCtrl();
+		actrl.sendAll();
+	}
 
 	// DB연결 메뉴 선택시 작업을 정의합니다.
 	private void connectActionPerformed(ActionEvent evt) {
